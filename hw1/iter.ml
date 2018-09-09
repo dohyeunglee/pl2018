@@ -17,4 +17,8 @@ let iter n f =
 			| 0 -> []
 			| n -> f :: (repeat f (n-1))
 		in	
-			fold_left ~init:id ~f:compose ~list:(repeat f n)
+			List.fold_left compose id (repeat f n)
+
+let _ = 
+	let test n = iter n (fun x -> x + 2) in
+	Printf.printf "%d\n" (test 5 0)
