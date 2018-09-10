@@ -6,7 +6,7 @@ type nat = ZERO | SUCC of nat
 
 let rec natadd (x, y) =
 	match x with
-    | ZERO -> y
+	| ZERO -> y
 	| SUCC n -> SUCC (natadd (n, y))
 
 let rec natmul (x, y) = 
