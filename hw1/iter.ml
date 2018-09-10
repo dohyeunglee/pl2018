@@ -4,8 +4,8 @@
 
 let id x = x
 let compose f g x = f (g x)
-let rec fold_left ~init ~f ~list = 
-	match list with
+let rec fold_left ~init ~f ~list =
+  match list with
 	| [] -> init
 	| hd :: rest -> fold_left ~init:(f init hd) ~f ~list:rest
 let iter n f = 
