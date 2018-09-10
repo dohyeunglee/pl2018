@@ -3,6 +3,6 @@
  *)
 
 let merge a b = 
-	let concat = a @ b in
-	List.sort (fun x y -> - compare x y) concat
+  let concat = a @ b in
+  List.sort (fun x y -> - compare x y) concat
 
