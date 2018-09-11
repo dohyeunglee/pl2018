@@ -19,10 +19,13 @@ let rec sigma a b f =
   in
     if int_a > int_b then 0.
     else
-      let diff = int_a - int_b in
-      match diff with
-      | 0 -> f (float_of_int int_a)
-      | _ -> f (float_of_int int_a) +. sigma (float_of_int (int_a + 1)) b f
+      let
+        diff = int_a - int_b and
+        float_a = float_of_int int_a
+      in
+        match diff with
+        | 0 -> f float_a
+        | _ -> f float_a +. sigma (float_a +. 1.) b f
 
 let rec quad_by_parts a b f =
   if a < b then (0.1 *. f a) +. quad_by_parts (a +. 0.1) b f
