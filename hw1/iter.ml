@@ -19,6 +19,3 @@ let iter n f =
   in
     List.fold_left compose id (repeat f n)
 
-let _ = 
-  let test n = iter n (fun x -> x + 2) in
-  Printf.printf "%d\n" (test 5 0)

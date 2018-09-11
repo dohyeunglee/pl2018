@@ -8,7 +8,3 @@ let rec _sigma a b f sum =
   else _sigma (a + 1) b f (sum + f a)
 
 let sigma a b f = _sigma (a+1) b f (f a)
-
-let _ =
-  let result = sigma 3 5 (fun x -> x + 1)
-  in Printf.printf "%d\n" result
