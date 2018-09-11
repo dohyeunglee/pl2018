@@ -2,7 +2,6 @@
  * 2015-11531, 이도형
  *)
 
-
 type team =
   | Korea
   | France
