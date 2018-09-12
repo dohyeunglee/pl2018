@@ -12,11 +12,11 @@ type ae =
 
 exception InvalidArgument
 
-let minimize =
-  function
-  | SUM ->
-  | TIMES ->
-  | x -> x
+(*let minimize =*)
+  (*function*)
+  (*| SUM ->*)
+  (*| TIMES ->*)
+  (*| x -> x*)
 
 
 let rec diff (ae, target) =
@@ -38,9 +38,6 @@ handle_times (list, target) =
           (TIMES (diff (ae, target) :: rest)) :: acc
   in
     SUM (List.fold_left f [] list)
-
-
-
 
 let
   ax_2 = TIMES [VAR "a" ; POWER ("x", 2)] and
