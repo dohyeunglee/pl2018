@@ -1,3 +1,7 @@
+(*
+ * 2015-11531, 이도형
+ *)
+
 type heap =
   | EMPTY
   | NODE of rank * value * heap * heap

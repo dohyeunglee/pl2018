@@ -7,4 +7,4 @@ let rec _sigma a b f sum =
   else if a > b then 0
   else _sigma (a + 1) b f (sum + f a)
 
-let sigma a b f = _sigma (a+1) b f (f a)
+let sigma (a, b, f) = _sigma (a+1) b f (f a)
