@@ -31,15 +31,12 @@ let rec sigma a b f =
         | 0 -> f float_a
         | _ -> f float_a +. sigma (float_a +. 1.) b f
 
-let rec quad_by_parts a b f =
-  if a < b then (0.1 *. f a) +. quad_by_parts (a +. 0.1) b f
-  else 0.
-
 let rec integral a b f =
   let diff = a -. b in
   if abs_float diff < 0.1 then 0.
   else if diff > 0. then (-. integral b a f)
-  else quad_by_parts a b f
+  else
+    (0.1 *. f a) +. integral (a +. 0.1) b f
 
 let rec expr_to_fun exp =
   match exp with
@@ -50,20 +47,20 @@ let rec expr_to_fun exp =
   | SUB (left, right) -> (fun x -> (expr_to_fun left) x -. (expr_to_fun right) x)
   | MUL (left, right) -> (fun x -> (expr_to_fun left) x *. (expr_to_fun right) x)
   | DIV (left, right) -> (fun x -> (expr_to_fun left) x /. (expr_to_fun right) x)
-  | SIGMA _ -> (fun _ -> mathemadiga exp)
-  | INTEGRAL _ -> (fun _ -> mathemadiga exp) and
-  mathemadiga =
+  | SIGMA _ -> (fun _ -> calculate exp)
+  | INTEGRAL _ -> (fun _ -> calculate exp) and
+  calculate =
     function
     | X -> raise FreeVariable
     | INT n -> float_of_int n
     | REAL n -> n
-    | ADD (left, right) -> mathemadiga left +. mathemadiga right
-    | SUB (left, right) -> mathemadiga left -. mathemadiga right
-    | MUL (left, right) -> mathemadiga left *. mathemadiga right
-    | DIV (left, right) -> mathemadiga left /. mathemadiga right
+    | ADD (left, right) -> calculate left +. calculate right
+    | SUB (left, right) -> calculate left -. calculate right
+    | MUL (left, right) -> calculate left *. calculate right
+    | DIV (left, right) -> calculate left /. calculate right
     | SIGMA (a, b, exp)
-        -> sigma (mathemadiga a) (mathemadiga b) (expr_to_fun exp)
+        -> sigma (calculate a) (calculate b) (expr_to_fun exp)
     | INTEGRAL (a, b, exp)
-        -> integral (mathemadiga a) (mathemadiga b) (expr_to_fun exp)
+        -> integral (calculate a) (calculate b) (expr_to_fun exp)
 
 
