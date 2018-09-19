@@ -12,13 +12,6 @@ type ae =
 
 exception InvalidArgument
 
-(*let minimize =*)
-  (*function*)
-  (*| SUM ->*)
-  (*| TIMES ->*)
-  (*| x -> x*)
-
-
 let rec diff (ae, target) =
   match ae with
   | CONST n -> CONST 0
@@ -38,16 +31,6 @@ handle_times (list, target) =
           (TIMES (diff (ae, target) :: rest)) :: acc
   in
     SUM (List.fold_left f [] list)
-
-let
-  ax_2 = TIMES [VAR "a" ; POWER ("x", 2)] and
-  bx = TIMES [VAR "b" ; VAR "x"] and
-  c = VAR "c" and
-  two_ax = TIMES [CONST 2 ; VAR "a" ; VAR "x"] and
-  b = VAR "b"
-let
-  expected = SUM [two_ax ; b] and
-  test = SUM [ax_2 ; bx ; c]
 
 
 

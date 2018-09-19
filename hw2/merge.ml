@@ -38,10 +38,5 @@ let deleteMin = function
   | EMPTY -> raise EmptyHeap
   | NODE(_, x, lh, rh) -> merge (lh, rh)
 
-let a = NODE (0, 8, NODE (0, 11, EMPTY, EMPTY), EMPTY);;
-let b = NODE (0, 12, NODE (0, 15, EMPTY, EMPTY), EMPTY);;
-let c = NODE (0, 7, NODE (0, 14, EMPTY, EMPTY), EMPTY);;
-let first = NODE (1, 5, NODE (0, 6, EMPTY, EMPTY), b);;
-let second = NODE (1, 3, c, a);;
 
 

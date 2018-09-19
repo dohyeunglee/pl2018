@@ -30,5 +30,3 @@ module IntListQ =
           in (pop, ([], rest))
   end
 
-module ValidIntListQ = (IntListQ : Queue)
-
