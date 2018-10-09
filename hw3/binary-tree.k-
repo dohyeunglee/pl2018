@@ -1,0 +1,65 @@
+let proc leaf (i) = {data := i, leaf := true} in
+let proc makeLtree (i, tree) = {data := i, ltree := tree, rtree := unit, leaf := false} in 
+let proc makeRtree (i, tree) = {data := i, ltree := unit, rtree := tree, leaf := false} in 
+let proc makeTree (i, lt, rt) = {data := i, ltree := lt, rtree := rt, leaf := false} in 
+let proc isEmpty (tree) = tree = unit in
+let proc rTree (tree) = tree.rtree in
+let proc lTree (tree) = tree.ltree in
+let proc nodeVal (tree) = tree.data in
+let proc dft (tree) = 
+  if (isEmpty(tree)) then
+    unit
+  else (
+    write (nodeVal (tree));
+    if (not tree.leaf) then
+      dft (lTree(tree));
+      dft (rTree(tree))
+    else
+      unit
+  ) in
+let proc height (tree) = 
+  if (isEmpty(tree)) then
+    0
+  else (
+    if tree.leaf then
+      1 
+    else (
+      let lheight := height (lTree(tree)) in
+      let rheight := height (rTree(tree)) in
+      if (rheight < lheight) then (lheight + 1) else (rheight + 1) 
+    )
+  ) in 
+let proc print_level (tree, level) =
+  if (isEmpty(tree)) then
+    ()
+  else (
+    if (level = 1) then
+      write (nodeVal (tree))      
+    else if (1 < level) then (
+      if tree.leaf then 
+        ()
+      else (
+        print_level (lTree (tree), (level - 1));
+        print_level (rTree (tree), (level - 1))
+      )
+    )
+    else
+      ()
+  ) in
+let proc bft (tree) = 
+  let x := 1 in
+  let level := height (tree) in
+  while (x < level + 1) do (print_level (tree, x); (x := x + 1)) in
+let tree1 := makeLtree (6, leaf (7)) in
+let tree2 := makeTree (4, tree1, leaf (5)) in
+let tree3 := makeTree (2, leaf (3), tree2) in
+let tree := makeLtree (1, tree3) in
+bft (tree)
+
+
+
+
+
+
+
+
